@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MyResume.Models.Post>
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title pull-left">Blog Posts</h4>
+                    <a asp-action="Create" class="btn btn-primary pull-right">CREATE A POST</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th>@Html.DisplayNameFor(p => p.Id)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Title)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Body)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Author)</th>
+                                    <th>@Html.DisplayNameFor(p => p.CreatedAt)</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.Body</td>
+                                        <td>@item.Author</td>
+                                        <td>@item.CreatedAt.ToLongDateString()</td>
+                                        <td class="td-actions text-center">
+                                            <a title="" class="btn btn-info btn-icon btn-icon-mini" data-original-title="Edit Task">
+                                                <i class="now-ui-icons ui-2_settings-90"></i>
+                                            </a>
+                                            <a title="" class="btn btn-danger btn-icon btn-icon-mini" data-original-title="Remove">
+                                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
