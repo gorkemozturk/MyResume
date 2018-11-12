@@ -1,0 +1,15 @@
+﻿@model MyResume.Models.Post
+
+<!-- Experience Item -->
+<div class="exp_item d-flex flex-md-row flex-column align-items-start justify-content-start">
+    <div><div class="exp_time">@Model.CreatedAt.ToShortDateString()</div></div>
+    <div class="exp_content">
+        <div class="exp_title_container">
+            <div class="exp_title">@Model.Title</div>
+            <div class="exp_subtitle">@Model.Author</div>
+        </div>
+        <div class="exp_text">
+            <p>@Model.Body</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MyResume.Models.Post>
+@{
+    ViewData["Title"] = "My Blog";
+}
+
+<div class="main_content">
+    <div class="main_title_container d-flex flex-column align-items-start justify-content-end">
+        <div class="main_subtitle">What I am writing</div>
+        <div class="main_title">@ViewData["Title"]</div>
+    </div>
+    <div class="main_content_scroll mCustomScrollbar" data-mcs-theme="minimal-dark">
+        <!-- Experience -->
+        <div class="experience">
+            @foreach (var item in Model)
+            {
+                <partial name="_BlogPostPartial" model="item" />
+            }
+        </div>
+    </div>
+</div>

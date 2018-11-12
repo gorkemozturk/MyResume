@@ -11,13 +11,17 @@
     <link rel="stylesheet" type="text/css" href="~/plugins/mCustomScrollbar/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" type="text/css" href="~/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="~/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="~/styles/portfolio.css">
+    <link rel="stylesheet" type="text/css" href="~/styles/portfolio_responsive.css">
+    <link rel="stylesheet" type="text/css" href="~/styles/experience.css">
+    <link rel="stylesheet" type="text/css" href="~/styles/experience_responsive.css">
 </head>
 <body>
 
     <div class="super_container">
 
         <!-- Header -->
-        <partial name="_MainMenuPartial"/>
+        <partial name="_MainMenuPartial" />
 
         <div class="content_container">
             <div class="main_content_outer d-flex flex-xl-row flex-column align-items-start justify-content-start">
@@ -79,16 +83,14 @@
                 <!-- Main Content -->
                 @RenderBody()
             </div>
-
-
         </div>
+
         <div align='center'>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;
             <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         </div>
-
     </div>
 
     <script src="~/js/jquery-3.2.1.min.js"></script>
@@ -104,6 +106,10 @@
     <script src="~/plugins/easing/easing.js"></script>
     <script src="~/plugins/parallax-js-master/parallax.min.js"></script>
     <script src="~/js/custom.js"></script>
+    <script src="~/js/portfolio.js"></script>
+    <script src="~/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/plugins/Isotope/fitcolumns.js"></script>
+    <script src="~/js/experience.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>
