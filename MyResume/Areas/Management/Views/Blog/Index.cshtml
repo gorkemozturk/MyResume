@@ -31,17 +31,30 @@
                                 {
                                     <tr>
                                         <td>@item.Id</td>
-                                        <td>@item.Title</td>
-                                        <td>@item.Body</td>
+                                        <td>
+                                            @if (@item.Title.Length > 25)
+                                            {
+                                                @item.Title.Substring(0, 25)
+                                            }
+                                            else
+                                            {
+                                                @item.Title
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (@item.Body.Length > 50)
+                                            {
+                                                @item.Body.Substring(0, 50)
+                                            }
+                                            else
+                                            {
+                                                
+                                            }
+                                        </td>
                                         <td>@item.Author</td>
                                         <td>@item.CreatedAt.ToLongDateString()</td>
                                         <td class="td-actions text-center">
-                                            <a title="" class="btn btn-info btn-icon btn-icon-mini" data-original-title="Edit Task">
-                                                <i class="now-ui-icons ui-2_settings-90"></i>
-                                            </a>
-                                            <a title="" class="btn btn-danger btn-icon btn-icon-mini" data-original-title="Remove">
-                                                <i class="now-ui-icons ui-1_simple-remove"></i>
-                                            </a>
+                                            <partial name="_ActionButtonsPartial" model="item.Id" />
                                         </td>
                                     </tr>
                                 }

@@ -5,7 +5,7 @@
     <div><div class="exp_time">@Model.CreatedAt.ToShortDateString()</div></div>
     <div class="exp_content">
         <div class="exp_title_container">
-            <div class="exp_title">@Model.Title</div>
+            @Html.ActionLink(Model.Title, "Post", "Blog", new { year = Model.CreatedAt.Year, month = Model.CreatedAt.Month, id = Model.Id }, new { @class = "exp_title" })
             <div class="exp_subtitle">@Model.Author</div>
         </div>
         <div class="exp_text">

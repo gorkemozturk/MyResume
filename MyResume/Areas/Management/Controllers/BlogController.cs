@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyResume.Data;
 using MyResume.Models;
 
@@ -34,7 +35,8 @@ namespace MyResume.Areas.Management.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Post post)
         {
-            if (!ModelState.IsValid) return View(post);
+            if (!ModelState.IsValid)
+                return View(post);
 
             post.CreatedAt = DateTime.Now;
 
@@ -42,6 +44,31 @@ namespace MyResume.Areas.Management.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(int ?id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var post = _context.Posts.FirstOrDefault(p => p.Id == id);
+
+            return View(post);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(int id, Post post)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            _context.Entry(post).State = EntityState.Modified;
+            _context.Entry(post).Property("CreatedAt").IsModified = false;
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }

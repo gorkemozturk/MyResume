@@ -12,16 +12,45 @@ namespace MyResume.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public IActionResult Index()
+        public BlogController(ApplicationDbContext context)
         {
-            var posts = _context.Posts.ToList();
+            _context = context;
+        }
+
+        public IActionResult Index(int page = 0)
+        {
+            var pageSize = 2;
+            var totalPosts = _context.Posts.Count();
+            var totalPages = totalPosts / pageSize;
+            var previousPage = page - 1;
+            var nextPage = page + 1;
+
+            ViewBag.PreviousPage = previousPage;
+            ViewBag.HasPreviousPage = previousPage >= 0;
+            ViewBag.NextPage = nextPage;
+            ViewBag.HasNextPage = nextPage < totalPages;
+
+            var posts = _context.Posts
+                        .OrderByDescending(p => p.CreatedAt)
+                        .Skip(pageSize * page)
+                        .Take(pageSize)
+                        .ToList();
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                return PartialView(posts);
 
             return View(posts);
         }
 
-        public IActionResult Post()
-        { 
-            return View();
+        [Route("Blog/Post/{year:min(2000)}/{month:range(1,12)}/{id}")]
+        public IActionResult Post(int ?year, int ?month, int ?id)
+        {
+            if (year == null || month == null || id == null)
+                return NotFound();
+
+            var post = _context.Posts.FirstOrDefault(p => p.Id == id);
+
+            return View(post);
         }
     }
 }

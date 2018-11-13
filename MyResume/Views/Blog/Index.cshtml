@@ -8,7 +8,26 @@
         <div class="main_subtitle">What I am writing</div>
         <div class="main_title">@ViewData["Title"]</div>
     </div>
-    <div class="main_content_scroll mCustomScrollbar" data-mcs-theme="minimal-dark">
+    <div id="content" class="main_content_scroll mCustomScrollbar" data-mcs-theme="minimal-dark">
+        <!-- Sorting -->
+        <div class="clearfix">
+            @if (ViewBag.HasPreviousPage)
+            {
+                <div class="services_button pull-left">
+                    <a href="@Url.Action("Index", "Blog", new { page = ViewBag.PreviousPage })">
+                        Previous
+                    </a>
+                </div>
+            }
+            @if (ViewBag.HasNextPage)
+            {
+                <div class="services_button pull-right">
+                    <a href="@Url.Action("Index", "Blog", new { page = ViewBag.NextPage })">
+                        Next
+                    </a>
+                </div>
+            }
+        </div> <hr />
         <!-- Experience -->
         <div class="experience">
             @foreach (var item in Model)
@@ -18,3 +37,15 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $('content').on('click', '.pagination a', function () {
+                var url = $(this).attr('href');
+                $('#content').load(url);
+                return false;
+            })
+        });
+    </script>
+}
