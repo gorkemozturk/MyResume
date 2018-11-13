@@ -13,7 +13,7 @@
                     <h4 class="card-title">@ViewData["Title"]</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" asp-antiforgery="true">
                         <div class="form-group">
                             <label asp-for="Title"></label>
                             <input class="form-control" asp-for="Title" />
@@ -34,6 +34,6 @@
 </div>
 
 @section Scripts
-    {
+{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

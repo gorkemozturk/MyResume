@@ -3,8 +3,12 @@
         <div class="logo">Görkem<span>.</span>Öztürk</div>
         <div class="main_nav d-flex flex-row align-items-end justify-content-start">
             <ul class="d-flex flex-row align-items-center justify-content-start">
-                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")"><a asp-action="Index" asp-controller="Home" asp-area="">About</a></li>
-                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Blog" ? "active" : "")"><a asp-action="Index" asp-controller="Blog" asp-area="">Blog</a></li>
+                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")"><a asp-action="Index" asp-controller="Home">About</a></li>
+                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Blog" ? "active" : "")"><a asp-action="Index" asp-controller="Blog">Blog</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                <li><a asp-action="Index" asp-controller="Home" asp-area="Management">Control Panel</a></li>
+                }
             </ul>
             <div class="header_button ml-auto">
                 <a href="#">Download My CV</a>
@@ -17,8 +21,12 @@
                 <div class="hamburger ml-auto">menu</div>
                 <div class="menu_nav text-right">
                     <ul>
-                        <li><a asp-action="Index" asp-controller="Home" asp-area="">About</a></li>
-                        <li><a asp-action="Index" asp-controller="Blog" asp-area="">Blog</a></li>
+                        <li><a asp-action="Index" asp-controller="Home">About</a></li>
+                        <li><a asp-action="Index" asp-controller="Blog">Blog</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a asp-action="Index" asp-controller="Home" asp-area="Management">Control Panel</a></li>
+                        }
                     </ul>
                 </div>
             </div>

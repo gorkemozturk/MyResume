@@ -9,9 +9,17 @@
         <div class="main_title">@ViewData["Title"]</div>
     </div>
     <div class="main_content_scroll mCustomScrollbar" data-mcs-theme="minimal-dark">
+        <!-- Sorting -->
+        <div>
+            <div class="services_button">
+                <a href="@Url.Action("Index", "Blog")">
+                    Back
+                </a>
+            </div>
+        </div> <hr />
         <!-- Experience -->
         <div class="experience">
-            <partial name="_BlogPostPartial"/>
+            <partial name="_BlogPostPartial" />
         </div>
     </div>
 </div>

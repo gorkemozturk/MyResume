@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyResume.Data;
@@ -10,6 +11,7 @@ using MyResume.Models;
 namespace MyResume.Areas.Management.Controllers
 {
     [Area("Management")]
+    [Authorize]
     public class BlogController : Controller
     {
         private readonly ApplicationDbContext _context;

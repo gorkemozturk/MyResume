@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,9 @@ namespace MyResume
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection"))
             );
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +45,8 @@ namespace MyResume
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseMvc(routes => {
                 routes.MapRoute(
