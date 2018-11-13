@@ -1,4 +1,4 @@
-﻿@model MyResume.ViewModels.Account.RegisterViewModel
+﻿@model MyResume.Models.ViewModels.Account.RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -16,7 +16,12 @@
                     <div class="col-md-6">
                         <div class="contact_form_container">
 
-                            <form method="post">
+                            <form method="post" asp-antiforgery="true">
+                                <div class="form-group">
+                                    <label asp-for="UserName"></label>
+                                    <input asp-for="UserName" class="contact_input">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
                                 <div class="form-group">
                                     <label asp-for="Email"></label>
                                     <input asp-for="Email" class="contact_input">

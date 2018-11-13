@@ -6,7 +6,7 @@
     <div class="exp_content">
         <div class="exp_title_container">
             @Html.ActionLink(Model.Title, "Post", "Blog", new { year = Model.CreatedAt.Year, month = Model.CreatedAt.Month, id = Model.Id }, new { @class = "exp_title" })
-            <div class="exp_subtitle">@Model.Author</div>
+             <div class="exp_subtitle">Wrote by @Model.User.UserName</div>
         </div>
         <div class="exp_text">
             <p>@Model.Body</p>

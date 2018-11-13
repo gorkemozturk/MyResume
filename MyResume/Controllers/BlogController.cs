@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyResume.Data;
 using MyResume.Models;
 
@@ -31,6 +32,7 @@ namespace MyResume.Controllers
             ViewBag.HasNextPage = nextPage < totalPages;
 
             var posts = _context.Posts
+                        .Include(p => p.User)
                         .OrderByDescending(p => p.CreatedAt)
                         .Skip(pageSize * page)
                         .Take(pageSize)
@@ -43,12 +45,12 @@ namespace MyResume.Controllers
         }
 
         [Route("Blog/Post/{year:min(2000)}/{month:range(1,12)}/{id}")]
-        public IActionResult Post(int ?year, int ?month, int ?id)
+        public async Task<IActionResult> Post(int ?year, int ?month, int ?id)
         {
             if (year == null || month == null || id == null)
                 return NotFound();
 
-            var post = _context.Posts.FirstOrDefault(p => p.Id == id);
+            var post = await _context.Posts.Include(p => p.User).FirstOrDefaultAsync(p => p.Id == id);
 
             return View(post);
         }

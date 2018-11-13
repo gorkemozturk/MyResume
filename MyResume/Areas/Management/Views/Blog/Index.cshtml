@@ -21,7 +21,7 @@
                                     <th>@Html.DisplayNameFor(p => p.Id)</th>
                                     <th>@Html.DisplayNameFor(p => p.Title)</th>
                                     <th>@Html.DisplayNameFor(p => p.Body)</th>
-                                    <th>@Html.DisplayNameFor(p => p.Author)</th>
+                                    <th>@Html.DisplayNameFor(p => p.UserId)</th>
                                     <th>@Html.DisplayNameFor(p => p.CreatedAt)</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -51,7 +51,7 @@
                                                 
                                             }
                                         </td>
-                                        <td>@item.Author</td>
+                                        <td>@item.User.UserName</td>
                                         <td>@item.CreatedAt.ToLongDateString()</td>
                                         <td class="td-actions text-center">
                                             <partial name="_ActionButtonsPartial" model="item.Id" />

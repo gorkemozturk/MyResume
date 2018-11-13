@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyResume.Data;
+using MyResume.Models.ViewModels.Account;
 using MyResume.Utilities;
-using MyResume.ViewModels.Account;
 
 namespace MyResume.Controllers
 {
@@ -17,14 +17,12 @@ namespace MyResume.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ILogger<LoginModel> _logger;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, ILogger<LoginModel> logger)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _logger = logger;
         }
 
         public IActionResult Register()
@@ -41,7 +39,7 @@ namespace MyResume.Controllers
 
             var user = new IdentityUser()
             {
-                UserName = registration.Email,
+                UserName = registration.UserName,
                 Email = registration.Email
             };
 
@@ -94,10 +92,7 @@ namespace MyResume.Controllers
             }
 
             if (string.IsNullOrWhiteSpace(returnUrl))
-            {
-                _logger.LogInformation("User logged in.");
                 return RedirectToAction("Index", "Home", new { area = "Management" });
-            }
 
             return Redirect(returnUrl);
         }
