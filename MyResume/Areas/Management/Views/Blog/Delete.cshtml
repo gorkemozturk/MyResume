@@ -1,6 +1,6 @@
 ﻿@model MyResume.Models.Post
 @{
-    ViewData["Title"] = "Create a New Post";
+    ViewData["Title"] = "Delete the Post";
 }
 
 <div class="panel-header panel-header-sm">
@@ -16,16 +16,14 @@
                     <form method="post" asp-antiforgery="true">
                         <div class="form-group">
                             <label asp-for="Title"></label>
-                            <input class="form-control" asp-for="Title" />
-                            <span class="text-danger" asp-validation-for="Title"></span>
+                            <input readonly class="form-control" asp-for="Title" />
                         </div>
                         <div class="form-group">
                             <label asp-for="Body"></label>
-                            <textarea asp-for="Body" class="form-control" rows="3"></textarea>
-                            <span class="text-danger" asp-validation-for="Body"></span>
+                            <textarea readonly asp-for="Body" class="form-control" rows="3"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-round">Create</button>
+                            <button type="submit" class="btn btn-danger btn-round">Delete</button>
                             <a asp-action="Index" class="btn btn-default btn-round">Back to the List</a>
                         </div>
                     </form>
@@ -34,8 +32,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts
-{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}

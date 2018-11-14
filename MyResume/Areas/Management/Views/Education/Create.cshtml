@@ -1,0 +1,60 @@
+﻿@model MyResume.Models.Education
+@{
+    ViewData["Title"] = "Create a New Education";
+}
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-antiforgery="true">
+                        <div class="form-group">
+                            <label asp-for="InstituteName"></label>
+                            <input class="form-control" asp-for="InstituteName" />
+                            <span class="text-danger" asp-validation-for="InstituteName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Degree"></label>
+                            <input class="form-control" asp-for="Degree" />
+                            <span class="text-danger" asp-validation-for="Degree"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StartedAt"></label>
+                            <input class="form-control" asp-for="StartedAt" />
+                            <span class="text-danger" asp-validation-for="StartedAt"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FinishedAt"></label>
+                            <input class="form-control" asp-for="FinishedAt" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Body"></label>
+                            <textarea asp-for="Body" class="form-control" rows="3"></textarea>
+                            <span class="text-danger" asp-validation-for="Body"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="IsCompleted" />
+                            <label asp-for="IsCompleted"></label>
+                            <span class="text-danger" asp-validation-for="IsCompleted"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-round">Create</button>
+                            <a asp-action="Index" class="btn btn-default btn-round">Back to the List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

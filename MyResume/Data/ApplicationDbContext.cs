@@ -16,6 +16,7 @@ namespace MyResume.Data
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Education> Educations { get; set; }
         public DbSet<Comment> Comments { get; set; }
     }
 }

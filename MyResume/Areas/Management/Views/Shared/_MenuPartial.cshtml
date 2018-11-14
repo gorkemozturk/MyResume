@@ -11,10 +11,10 @@
             <p>Blog</p>
         </a>
     </li>
-    <li>
-        <a href="./map.html">
-            <i class="now-ui-icons location_map-big"></i>
-            <p>Maps</p>
+    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Education" ? "active" : "")">
+        <a asp-area="Management" asp-action="Index" asp-controller="Education">
+            <i class="now-ui-icons education_hat"></i>
+            <p>Education</p>
         </a>
     </li>
     <li>

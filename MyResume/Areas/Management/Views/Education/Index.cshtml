@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MyResume.Models.Education>
+@{
+    ViewData["Title"] = "Education";
+}
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title pull-left">Education Lists</h4>
+                    <a asp-action="Create" class="btn btn-primary pull-right">CREATE</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th class="text-center">@Html.DisplayNameFor(p => p.Id)</th>
+                                    <th>@Html.DisplayNameFor(p => p.InstituteName)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Degree)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Body)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(p => p.StartedAt)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(p => p.FinishedAt)</th>
+                                    <th>@Html.DisplayNameFor(p => p.CreatedAt)</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@item.Id</td>
+                                        <td>@item.InstituteName</td>
+                                        <td>@item.Degree</td>
+                                        <td>
+                                            @if (item.Body != null)
+                                            {
+                                                @if (item.Body.Length > 50)
+                                                {
+                                                    @item.Body.Substring(0, 50)
+                                                }
+                                                else
+                                                {
+                                                    @item.Body
+                                                }
+                                            }
+                                        </td>
+                                        <td class="text-center">@item.StartedAt</td>
+                                        <td class="text-center">@item.FinishedAt</td>
+                                        <td>@item.CreatedAt.ToLongDateString()</td>
+                                        <td class="td-actions text-center">
+                                            <partial name="_ActionButtonsPartial" model="item.Id" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

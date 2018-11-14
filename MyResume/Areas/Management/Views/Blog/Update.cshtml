@@ -24,8 +24,10 @@
                             <textarea asp-for="Body" class="form-control" rows="3"></textarea>
                             <span class="text-danger" asp-validation-for="Body"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-round">Update</button>
-                        <a asp-action="Index" class="btn btn-default btn-round">Back to the List</a>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-round">Update</button>
+                            <a asp-action="Index" class="btn btn-default btn-round">Back to the List</a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -34,6 +36,6 @@
 </div>
 
 @section Scripts
-    {
+{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

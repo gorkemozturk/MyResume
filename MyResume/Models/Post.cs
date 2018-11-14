@@ -10,6 +10,7 @@ namespace MyResume.Models
 {
     public class Post
     {
+        [Display(Name = "ID")]
         public int Id { get; set; }
 
         [Display(Name = "User")]

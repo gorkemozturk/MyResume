@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MyResume.Models.Education>
+@{
+    ViewData["Title"] = "Education";
+}
+
+<div class="main_content">
+    <div class="main_title_container d-flex flex-column align-items-start justify-content-end">
+        <div class="main_subtitle">My Education</div>
+        <div class="main_title">My Education</div>
+    </div>
+    <div class="main_content_scroll mCustomScrollbar" data-mcs-theme="minimal-dark">
+
+        <!-- Education -->
+        <div class="education">
+
+            @foreach (var item in Model)
+            {
+                <!-- Education Item -->
+                <div class="edu_item d-flex flex-lg-row flex-column align-items-start justfy-content-start">
+                    <div><div class="exp_time">@item.StartedAt - @if (item.FinishedAt == null) { @Html.Raw("PRESENT") } else { @item.FinishedAt }</div></div>
+                    <div class="edu_content">
+                        <div class="edu_title_container">
+                            <div class="edu_title">@item.InstituteName</div>
+                            <div class="edu_subtitle">@item.Degree</div>
+                        </div>
+                        <div class="edu_text">
+                            <p>@item.Body</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

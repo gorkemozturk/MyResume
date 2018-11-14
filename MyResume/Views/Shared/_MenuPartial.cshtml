@@ -5,6 +5,7 @@
             <ul class="d-flex flex-row align-items-center justify-content-start">
                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")"><a asp-action="Index" asp-controller="Home">About</a></li>
                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Blog" ? "active" : "")"><a asp-action="Index" asp-controller="Blog">Blog</a></li>
+                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Education" ? "active" : "")"><a asp-action="Index" asp-controller="Education">Education</a></li>
                 @if (User.Identity.IsAuthenticated)
                 {
                 <li><a asp-action="Index" asp-controller="Home" asp-area="Management">Control Panel</a></li>
@@ -23,6 +24,7 @@
                     <ul>
                         <li><a asp-action="Index" asp-controller="Home">About</a></li>
                         <li><a asp-action="Index" asp-controller="Blog">Blog</a></li>
+                        <li><a asp-action="Index" asp-controller="Education">Education</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li><a asp-action="Index" asp-controller="Home" asp-area="Management">Control Panel</a></li>

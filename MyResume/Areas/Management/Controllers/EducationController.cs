@@ -1,36 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyResume.Data;
 using MyResume.Models;
-using MyResume.Models.ViewModels;
 
 namespace MyResume.Areas.Management.Controllers
 {
     [Area("Management")]
     [Authorize]
-    public class BlogController : Controller
+    public class EducationController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BlogController(ApplicationDbContext context)
+        public EducationController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var posts = await _context.Posts
-                        .Include(p => p.User)
-                        .OrderByDescending(p => p.CreatedAt)
-                        .ToListAsync();
+            var educations = await _context.Educations.OrderByDescending(e => e.CreatedAt).ToListAsync();
 
-            return View(posts);
+            return View(educations);
         }
 
         public IActionResult Create()
@@ -40,18 +35,14 @@ namespace MyResume.Areas.Management.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Post post)
+        public async Task<IActionResult> Create(Education education)
         {
             if (!ModelState.IsValid)
-                return View(post);
+                return View(education);
 
-            var identity = (ClaimsIdentity)this.User.Identity;
-            var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            education.CreatedAt = DateTime.Now;
 
-            post.UserId = claim.Value;
-            post.CreatedAt = DateTime.Now;
-
-            _context.Posts.Add(post);
+            _context.Educations.Add(education);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
@@ -62,53 +53,51 @@ namespace MyResume.Areas.Management.Controllers
             if (id == null)
                 return NotFound();
 
-            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            var education = await _context.Educations.FindAsync(id);
 
-            if (post == null)
+            if (education == null)
                 return NotFound();
 
-            return View(post);
+            return View(education);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, Post post)
+        public async Task<IActionResult> Update(int id, Education education)
         {
-            if (id != post.Id)
+            if (id != education.Id)
                 return NotFound();
 
             if (!ModelState.IsValid)
-                return View();
+                return NotFound();
 
-            _context.Entry(post).State = EntityState.Modified;
-            _context.Entry(post).Property("CreatedAt").IsModified = false;
-            _context.Entry(post).Property("UserId").IsModified = false;
+            _context.Entry(education).State = EntityState.Modified;
+            _context.Entry(education).Property("CreatedAt").IsModified = false;
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
-
         }
 
-        public async Task<IActionResult> Delete(int ?id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            var education = await _context.Educations.FindAsync(id);
 
-            if (post == null)
+            if (education == null)
                 return NotFound();
 
-            return View(post);
+            return View(education);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            var education = await _context.Educations.FirstOrDefaultAsync(p => p.Id == id);
 
-            _context.Posts.Remove(post);
+            _context.Educations.Remove(education);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

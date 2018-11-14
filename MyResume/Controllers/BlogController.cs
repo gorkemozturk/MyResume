@@ -18,7 +18,7 @@ namespace MyResume.Controllers
             _context = context;
         }
 
-        public IActionResult Index(int page = 0)
+        public async Task<IActionResult> Index(int page = 0)
         {
             var pageSize = 2;
             var totalPosts = _context.Posts.Count();
@@ -31,12 +31,12 @@ namespace MyResume.Controllers
             ViewBag.NextPage = nextPage;
             ViewBag.HasNextPage = nextPage < totalPages;
 
-            var posts = _context.Posts
+            var posts = await _context.Posts
                         .Include(p => p.User)
                         .OrderByDescending(p => p.CreatedAt)
                         .Skip(pageSize * page)
                         .Take(pageSize)
-                        .ToList();
+                        .ToListAsync();
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 return PartialView(posts);
